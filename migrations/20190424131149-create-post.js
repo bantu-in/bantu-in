@@ -14,13 +14,13 @@ module.exports = {
       body: {
         type: Sequelize.STRING
       },
-      categoryId: {
+      CategoryId: {
         type: Sequelize.INTEGER
       },
-      providerId: {
+      ProviderId: {
         type: Sequelize.INTEGER
       },
-      workerId: {
+      WorkerId: {
         type: Sequelize.INTEGER
       },
       price: {
