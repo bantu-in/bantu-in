@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.INTEGER,
     workerNeeded: DataTypes.INTEGER,
     lat: DataTypes.FLOAT,
-    lng: DataTypes.FLOAT
+    lng: DataTypes.FLOAT,
+    status: DataTypes.STRING
   }, {});
   Post.associate = function(models) {
     // associations can be defined here

@@ -5,7 +5,17 @@
     <%- include ../partials/navbar.ejs %>
     <div class="container">
         <!-- ADD CONTENT HERE -->
-        ini history
+        <div class="container">
+            <h4 class="title">Completed Projects</h4>
+            <% posts.forEach( post => { %>
+                <div class="card white">
+                    <div class="card-content">
+                        <a href=""><h5><%= post.title %> </h5></a>
+                        <p> <%= post.body %> </p>
+                    </div>
+                </div>
+            <% } ) %>
+        </div>
     </div>
 
 <%- include ../partials/loadScript.ejs %>

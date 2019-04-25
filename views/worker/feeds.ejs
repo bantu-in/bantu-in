@@ -8,35 +8,62 @@
     </style>
 
 <body>
+    
     <%- include ../partials/navbar.ejs %>
         <div id="map"></div>
         <script>
-            let pos = {
+            let loc = {
                 lat: <%- data.lat %>,
                 lng: <%- data.lng %>
             }
-           
-            var map;
+            var map, infoWindow;
             function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
-                    center: pos,
-                    zoom: 8
+                center: {lat: -34.397, lng: 150.644},
+                zoom: 14
                 });
-                
-                let user = new google.maps.Marker({
-                    position: pos,
-                    map: map,
-                    title: '<%- data.firstName %>',
-                    icon: "https://img.icons8.com/cotton/64/000000/workers-male.png"
+                infoWindow = new google.maps.InfoWindow;
+
+                // Try HTML5 geolocation.
+                if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                    };
+                    loc = pos
+                    map.setCenter(pos);
+                    let user = new google.maps.Marker({
+                        position: pos,
+                        draggable: true,
+                        map: map,
+                        title: '<%- data.firstName %>',
+                        icon: "https://img.icons8.com/cotton/64/000000/workers-male.png"
+                    })
+
+                }, function() {
+                    handleLocationError(true, infoWindow, map.getCenter());
                 });
+                }
+                else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
+                }
+                google.maps.event.addListener(
+                marker,
+                'drag',
+                function() {
+                    document.getElementById('lat1').innerHTML = marker.position.lat().toFixed(6);
+                    document.getElementById('lng1').innerHTML = marker.position.lng().toFixed(6);
+                    document.getElementById('zoom').innerHTML = mapObject.getZoom();
 
-                let info = new google.maps.InfoWindow({
-                    content: `<%- data.firstName%> <%- data.lastName %>`
-                })
+                    // Dynamically show it somewhere if needed
+                    $(".x").text(marker.position.lat().toFixed(6));
+                    $(".y").text(marker.position.lng().toFixed(6));
+                    $(".z").text(map.getZoom());
 
-                user.addListener('click', function(){
-                    info.open(map, user)
-                })
+                }
+            );   
             }
         </script>
     <div class="container">
@@ -46,7 +73,8 @@
             <% posts.forEach( post => { %>
                 <div class="card white">
                     <div class="card-content">
-                        <a href=""><h5><%= post.title %> </h5></a>
+                        <a href="./jobDetails/<%= post.id %>"><h5><%= post.title %> </h5></a>
+                        <h6 class="teal-text"> <%- inRupiah(post.price) %> </h6>
                         <p> <%= post.body %> </p>
                     </div>
                 </div>
