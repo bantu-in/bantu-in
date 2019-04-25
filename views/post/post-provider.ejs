@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include ../partials/head.ejs %>
+<body>
+    <%- include ../partials/navbarProv.ejs %>
+    <div class="container">
+        <!-- ADD CONTENT HERE -->
+        <h5>Job Detail</h5>
+        <table>
+            <tr>
+                <td>id</td>
+                <td>Title</td>
+                <td>Body</td>
+                
+            </tr>
+            <tr>
+                <td><%- post.id %></td>
+                <td><%- post.title %></td>
+                <td><%- post.body %></td>
+                
+            </tr>
+        </table>
+        <div style="margin-top:20px;">
+            <div class="left">
+                <label>Price</label>
+                <a><%- inRupiah(post.price) %></a>
+                <br>
+                <label>Workers Needed</label>
+                <a><%- post.workerNeeded %></a>
+            </div>
+            <div class="right">
+                <label class="right">Status</label>
+                <h6><a><%- post.status %></a></h6>
+            </div>
+            <% if (post.status === 'ongoing') { %>
+                <div class="center" style="clear:both">
+                    <label>Worker</label>
+                    <h6><a href="/worker/<%- workerId %>"><%- workerName %></a></h6>
+                    <br>
+                    <br>
+                </div>
+            <% } %>
+            <% if (post.status === 'waiting') { %>
+                <br>
+                <div class="center" style="clear:both">
+                    <label>Waiting for workers to apply</label>
+                    <br>
+                    <br>
+                </div>
+            <% } %>
+        </div>
+
+        <div style="clear:both" class="center">
+            <% if (post.status == 'waiting') { %>
+                <a class="btn disabled">Finished</a>
+                <a href="/provider/<%- username %>/post/<%- post.id %>/delete" class="waves-effect waves-light btn-small" onclick="return confirm('Are you sure ?')">Delete Job</a>
+            <% } %>
+            <% if (post.status == 'ongoing') { %>
+                <a href="/provider/<%- username %>/post/<%- post.id %>/finished" class="waves-effect waves-light btn-small" onclick="return confirm('Has this task finished?')">Finished</a>
+                <a class="btn disabled">Delete Job</a>
+            <% } %>
+        </div>
+    </div>
+
+<%- include ../partials/loadScript.ejs %>
+</body>
+</html>
