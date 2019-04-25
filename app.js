@@ -3,11 +3,8 @@ const app = express()
 const PORT = 3000
 const session = require('express-session')
 
-
-
 app.use(session ({
-    secret: 'daringFox',
-    cookie: {}
+    secret: 'daringFox'
 }))
 
 app.use((req, res, next)=>{
@@ -24,6 +21,7 @@ app.use('/', require('./routes/loginRoutes'))
 
 app.use(express.static(__dirname + '/css/'))
 app.use(express.static(__dirname + '/res/'))
+app.use(express.static(__dirname + '/maps/'))
 
 app.listen(PORT, () => {
     console.log(`app running on port ${PORT}`);

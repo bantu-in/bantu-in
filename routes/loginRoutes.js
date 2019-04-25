@@ -12,10 +12,9 @@ router.get("/", (req, res) => {
         res.render("login.ejs")
     }else{
         if(req.session.role === 'worker'){
-            console.log('worker')
             res.redirect(`/worker/${req.session.username}/feeds`)
         }
-        else if(req.session.role === 'worker'){
+        else if(req.session.role === 'provider'){
             res.redirect(`/provider/${req.session.username}/my-project`)
         }
     }
