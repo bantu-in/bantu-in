@@ -4,8 +4,45 @@
 <body>
     <%- include ../partials/navbarProv.ejs %>
     <div class="container">
+        <h6>Edit your profile</h6>
         <!-- ADD CONTENT HERE -->
-        ini profile
+        <form action="/provider/my-project">
+            <div>
+                <div style="width:50%; float: left;">
+                    <label>First name</label>
+                    <input type="text" value="<%- provider.firstName %>">
+                    <label>Last name</label>
+                    <input type="text" value="<%- provider.lastName%>">
+                    <label>Email</label>
+                    <input type="text" value="<%- provider.email%>">
+                    <label>Phone</label>
+                    <input type="text" value="<%- provider.phone%>">
+                    <label>Adress</label>
+                    <input type="text" value="<%- provider.address%>">
+                </div>
+                <div style="width: 30%; float: left; margin-left: 20px;">
+                    <label>Username</label>
+                    <input type="text" value="<%- provider.username%>">
+                    <label>Password</label>
+                    <input type="text" value="<%- provider.password%>">
+                    <label>Profile Picture</label><br>
+                    <form action="#">
+                            <div class="file-field input-field">
+                              <div class="btn">
+                                <span>File</span>
+                                <input type="file">
+                              </div>
+                              <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                              </div>
+                            </div>
+                          </form>
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
 
 <%- include ../partials/loadScript.ejs %>

@@ -5,7 +5,50 @@
     <%- include ../partials/navbarProv.ejs %>
     <div class="container">
         <!-- ADD CONTENT HERE -->
-        ini my project
+        <br>
+        <div class="right">
+            <label>Add New Project</label>
+            <a href="/provider/new-project" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>
+        </div>
+        <h5>Ongoing Works</h5>
+        <table id="ongoingPost">
+            <tr>
+                <td>No.</td>
+                <td>Title</td>
+                <td>Description</td>
+                <td>Price</td>
+                <td>WorkerNeeded</td>
+            </tr>
+            <% ongoingPosts.forEach((ongoingPost,index) => { %>
+            <tr>
+                <td><%- index+1 %></td>
+                <td><a href="/post/<%- ongoingPost.id %>"><%- ongoingPost.title %></a></td>
+                <td><%- ongoingPost.body %></td>
+                <td><%- inRupiah(ongoingPost.price) %></td>
+                <td style="text-align: center"><%- ongoingPost.workerNeeded %></td>
+            </tr>
+                <% }) %>
+        </table>
+
+        <h5>Waiting For Workers</h5>
+        <table id="waitingPost">
+                <tr>
+                    <td>No.</td>
+                    <td>Title</td>
+                    <td>Body</td>
+                    <td>Price</td>
+                    <td>WorkerNeeded</td>
+                </tr>
+                <% waitingPosts.forEach((waitingPost,index) => { %>
+                <tr>
+                    <td><%- index+1 %></td>
+                    <td><a href="/post/<%- waitingPost.id %>"><%- waitingPost.title %></a></td>
+                    <td><%- waitingPost.body %></td>
+                    <td><%- inRupiah(waitingPost.price) %></td>
+                    <td style="text-align: center"><%- waitingPost.workerNeeded %></td>
+                </tr>
+                    <% }) %>
+            </table>
     </div>
 
 <%- include ../partials/loadScript.ejs %>

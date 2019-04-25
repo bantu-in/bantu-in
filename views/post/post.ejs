@@ -8,9 +8,9 @@
         <h5>Finished Jobs</h5>
         <table>
             <tr>
-                <td>No.</td>
+                <td>id</td>
                 <td>Title</td>
-                <td>Description</td>
+                <td>Body</td>
                 <td>Price</td>
                 <td>Finished On</td>
             </tr>
@@ -19,7 +19,7 @@
                 <td><%- index+1 %></td>
                 <td><a href=""><%- post.title %></a></td>
                 <td><%- post.body %></td>
-                <td><%- inRupiah(post.price) %></td>
+                <td><%- post.price %></td>
                 <td style="text-align: center"><%- post.updatedAt %></td>
             </tr>
                 <% }) %>
