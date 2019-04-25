@@ -13,6 +13,18 @@ module.exports = {
 
       Example:
       */
+        provider.forEach(data => {
+          data.createdAt = new Date(data.createdAt)
+          data.updatedAt = new Date(data.updatedAt)
+        });
+        worker.forEach(data => {
+          data.createdAt = new Date(data.createdAt)
+          data.updatedAt = new Date(data.updatedAt)
+        });
+        post.forEach(data => {
+          data.createdAt = new Date(data.createdAt)
+          data.updatedAt = new Date(data.updatedAt)
+        });
         return Promise.all( [
           queryInterface.bulkInsert('Providers', provider, {}),
           queryInterface.bulkInsert('Posts', post, {}),
