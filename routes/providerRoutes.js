@@ -7,6 +7,7 @@ const Provider = Model.Provider
 const Worker = Model.Worker
 const Tag = Model.Tag
 
+router.use(express.urlencoded({extended: false}))
 router.get("/", (req, res) => {
     res.render("./provider/my-project.ejs")
 })

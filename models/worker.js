@@ -8,7 +8,9 @@ module.exports = (sequelize, DataTypes) => {
     address: DataTypes.STRING,
     lat: DataTypes.FLOAT,
     lng: DataTypes.FLOAT,
-    profilePicture: DataTypes.STRING
+    profilePicture: DataTypes.STRING,
+    username: DataTypes.STRING,
+    password: DataTypes.STRING
   }, {});
   Worker.associate = function(models) {
     // associations can be defined here

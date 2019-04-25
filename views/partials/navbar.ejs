@@ -1,15 +1,19 @@
 
 <nav class="nav-extended">
 <div class="nav-wrapper">
-    <a href="#" class="brand-logo">bantu.in</a>    
+    <div class="container">
+        <a href="#" class="brand-logo">bantu.in</a> 
+        <h6 style="display: inline" class="left">hello, <%= username %></h6>
+        <a href="/logout" class="waves-effect waves-light btn right">Logout</a>   
+    </div>
 </div>
 <div class="nav-content">
     <ul class="tabs tabs-transparent">
-    <li class="tab"><a href="/worker/feeds">Feeds</a></li>
-    <li class="tab"><a href="/worker/search-job">Find Job</a></li>
-    <li class="tab"><a href="/worker/ongoing">Ongoing</a></li>
-    <li class="tab"><a href="/worker/history">History</a></li>
-    <li class="tab"><a href="/worker/profile">Profile</a></li>
+    <li class="tab"><a href="/worker/<%= username %>/feeds">Feeds</a></li>
+    <li class="tab"><a href="/worker/<%= username %>/search-job">Find Job</a></li>
+    <li class="tab"><a href="/worker/<%= username %>/ongoing">Ongoing</a></li>
+    <li class="tab"><a href="/worker/<%= username %>/history">History</a></li>
+    <li class="tab"><a href="/worker/<%= username %>/profile">Profile</a></li>
     </ul>
 </div>
 </nav>
