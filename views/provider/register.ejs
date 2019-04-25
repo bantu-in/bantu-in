@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-  <% include ./partials/head.ejs %>
+  <% include ../partials/head.ejs %>
   <body>
     <div class="container">
-        <form action="/workerLogin" method="POST">
+        <form action="/provider/register" method="POST">
                 <div class="row">
                         <div class="section"></div>
                         <main>
@@ -11,16 +11,18 @@
                             <div class="container">
                               <div
                                 class="z-depth-3 y-depth-3 x-depth-3 grey green-text lighten-4 row"
-                                style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px; margin-top: 20px; solid #EEE;"
-                              >
-                              <h3><a class="brand-logo">bantu.in</a></h3>
-                              <h5>WORKER</h5>
-                
+                                style="display: inline-block; padding: 0px 48px 0px 48px; border: 1px; margin-top: 0px; solid #EEE;"
+                                >
+                                <div class="section"></div>
+                                <div class="section"></div>
+                                
+                                <h5>PROVIDER</h5>
                                 <div class="section">
                                   <i class="mdi-alert-error red-text"></i>
                                 </div>
-                
+                                
                                 <div class="row">
+
                                   <div class="input-field col s12">
                                     <input
                                       class="validate"
@@ -47,7 +49,35 @@
                                     <a><b style="color: #F5F5F5;">Forgot Password?</b></a>
                                   </label>
                                 </div>
-                                <br />
+
+                                <div class="row">
+                                  <div class="input-field col s6">
+                                    <input placeholder="first name" name="firstName" type="text" class="validate" required>
+                                  </div>
+                                  <div class="input-field col s6">
+                                    <input placeholder="last name" name="lastName" type="text" class="validate" required>
+                                  </div>
+                                </div>
+
+                                <div class="row">
+                                  <div class="input-field col s6">
+                                    <input placeholder="email" name="email" type="text" class="validate" required>
+                                  </div>
+                                  <div class="input-field col s6">
+                                    <input placeholder="phone" name="phone" type="text" class="validate" required>
+                                  </div>
+                                </div>
+
+                                <div class="row">
+                                  <div class="input-field col s6">
+                                    <input placeholder="address" name="address" type="text" class="validate" required>
+                                  </div>
+                                  <div class="input-field col s6">
+                                    <input placeholder="Location ?" name="location" type="text" class="validate">
+                                  </div>
+                                </div>
+
+                                
                                 <center>
                                   <div class="row">
                                     <button
@@ -56,17 +86,10 @@
                                       name="btn_login"
                                       class="col s8 btn btn-small white black-text  waves-effect z-depth-1 y-depth-1"
                                     >
-                                      Login
+                                      Register
                                     </button>
                                   </div>
-                                  <div class="row">
-                                        <div class="col s6">
-                                            <a href="/login/provider">login as provider</a>
-                                        </div>
-                                        <div class="col s6">
-                                            <a href="/worker/register">register worker</a>
-                                        </div>
-                                    </div>
+                                  
                                 </center>
                               </div>
                             </div>
@@ -75,6 +98,6 @@
                       </div>
         </form>
     </div>
-    <% include ./partials/loadScript.ejs %>
+    <% include ../partials/loadScript.ejs %>
   </body>
 </html>

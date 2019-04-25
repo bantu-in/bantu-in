@@ -6,25 +6,25 @@
     <div class="container">
         <h6>Edit your profile</h6>
         <!-- ADD CONTENT HERE -->
-        <form action="/provider/my-project">
+        <form action="/provider/<%- username %>/profile" method="POST">
             <div>
                 <div style="width:50%; float: left;">
                     <label>First name</label>
-                    <input type="text" value="<%- provider.firstName %>">
+                    <input name="firstName" type="text" value="<%- provider.firstName %>" required>
                     <label>Last name</label>
-                    <input type="text" value="<%- provider.lastName%>">
+                    <input name="lastName" type="text" value="<%- provider.lastName%>" required>
                     <label>Email</label>
-                    <input type="text" value="<%- provider.email%>">
+                    <input name="email" type="text" value="<%- provider.email%>" required>
                     <label>Phone</label>
-                    <input type="text" value="<%- provider.phone%>">
+                    <input name="phone" type="text" value="<%- provider.phone%>" required>
                     <label>Adress</label>
-                    <input type="text" value="<%- provider.address%>">
+                    <input name="adress" type="text" value="<%- provider.address%>" required>
                 </div>
                 <div style="width: 30%; float: left; margin-left: 20px;">
                     <label>Username</label>
-                    <input type="text" value="<%- provider.username%>">
+                    <input name="username" type="text" value="<%- provider.username%>" required>
                     <label>Password</label>
-                    <input type="text" value="<%- provider.password%>">
+                    <input name="password" type="text" value="<%- provider.password%>" required>
                     <label>Profile Picture</label><br>
                     <form action="#">
                             <div class="file-field input-field">
@@ -33,7 +33,7 @@
                                 <input type="file">
                               </div>
                               <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text">
+                                <input class="file-path validate" type="text" >
                               </div>
                             </div>
                           </form>

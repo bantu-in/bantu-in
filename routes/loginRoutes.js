@@ -73,7 +73,7 @@ router.post("/providerLogin", (req, res) => {
                 req.session.username = username
                 req.session.userId = found.id
                 req.session.isLogin = true
-                res.redirect(`./provider/my-project`)
+                res.redirect(`./provider/${req.session.username}/my-project`)
             }else{
                 throw 'invalid username/password'
             }
