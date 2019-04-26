@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+var bcrypt = require('bcryptjs');
 
 const Model = require('../models')
 const Provider = Model.Provider
@@ -38,16 +39,19 @@ router.post("/workerLogin", (req, res) => {
     let username = req.body.username
     let password = req.body.password
     Worker.findOne({where: {
-        username: username,
-        password: password
+        username: username
     }})
         .then(found => {
             if(found){
-                req.session.username = username
-                req.session.userId = found.id
-                req.session.isLogin = true
-                req.session.role = 'worker'
-                res.redirect(`./worker/${username}/feeds`)
+                if(bcrypt.compareSync(password, found.password)){
+                    req.session.username = username
+                    req.session.userId = found.id
+                    req.session.isLogin = true
+                    req.session.role = 'worker'
+                    res.redirect(`./worker/${username}/feeds`)
+                }else{
+                    throw ('invalid username/password')
+                }
             }else{
                 throw ('invalid username/password')
             }

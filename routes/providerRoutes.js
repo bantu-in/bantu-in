@@ -209,11 +209,14 @@ router.get('/:username/post/:id', (req, res) => {
                 if (post.Worker) {
                     let workerName = `${post.Worker.firstName} ${post.Worker.lastName}`
                     let workerId = post.Worker.id
+                    // let worker = new Worker(post.Worker)
+                    // console.log(post.Worker.getFullName())
                     res.render('./post/post-provider.ejs',{
                         post : post,
                         username : req.session.username,
                         userId : req.session.userId,
                         workerName : workerName,
+                        // workerName : worker.getFullName(),
                         workerId : workerId,
                         inRupiah
                     })
