@@ -75,11 +75,19 @@
                                   <div class="input-field col s6">
                                     <input placeholder="address" name="address" type="text" class="validate" required>
                                   </div>
-                                  <div class="input-field col s6">
-                                    <input placeholder="Location ?" name="location" type="text" class="validate">
-                                  </div>
                                 </div>
 
+                                <div class="row">
+                                  <div class="input-field col s6">
+                                    <input id="lat1" placeholder="latitude" name="lat" type="text" class="validate" value="">
+                                  </div>
+                                   <div class="input-field col s6">
+                                    <input id="lng1" placeholder="longitude" name="lng" type="text" class="validate" value="">
+                                  </div>    
+                                </div>
+                                <center>
+                                  <div id="map"></div>
+                                </center>
                                 
                                 <center>
                                   <div class="row">
@@ -87,8 +95,7 @@
                                       style="margin-left:65px;"
                                       type="submit"
                                       name="btn_login"
-                                      class="col s8 btn btn-small white black-text  waves-effect z-depth-1 y-depth-1"
-                                    >
+                                      class="col s8 btn btn-small white black-text  waves-effect z-depth-1 y-depth-1">
                                       Register
                                     </button>
                                   </div>
@@ -101,6 +108,40 @@
                       </div>
         </form>
     </div>
+    <script>
+      function initMap(){
+            var lt=48.451778;
+            var lg=31.646305;
+
+            var myLatlng = new google.maps.LatLng(lt,lg);
+            var mapOptions = {
+                center: new google.maps.LatLng(lt,lg),
+                zoom: 6,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            var map = new google.maps.Map(document.getElementById('map'),mapOptions);   
+            var marker = new google.maps.Marker({
+                position:myLatlng,
+                map:map
+            });
+
+            google.maps.event.addListener(map, 'click', function(event) {
+                if(marker === null){
+                    marker = new google.maps.Marker({
+                    position: event.latLng, 
+                    map: map
+                });
+                }
+                else{
+                    marker.setPosition(event.latLng)
+                }
+                map.panTo(event.latLng)
+                document.getElementById('lat1').value = marker.position.lat().toFixed(6);
+                document.getElementById('lng1').value = marker.position.lng().toFixed(6);
+            });
+}
+    </script>
     <% include ../partials/loadScript.ejs %>
   </body>
 </html>

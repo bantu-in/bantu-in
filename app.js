@@ -17,8 +17,6 @@ app.use('/provider', require('./routes/providerRoutes'))
 app.use('/', require('./routes/loginRoutes'))
 // app.use('/subject', require('./routes/subjectRoutes'))
 
-
-
 app.use(express.static(__dirname + '/css/'))
 app.use(express.static(__dirname + '/res/'))
 app.use(express.static(__dirname + '/maps/'))
