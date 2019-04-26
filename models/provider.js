@@ -19,10 +19,22 @@ module.exports = (sequelize, DataTypes) => {
     profilePicture: DataTypes.STRING,
     username : DataTypes.STRING,
     password: DataTypes.STRING
-  }, {});
+  }, {
+    hooks : {
+      beforeCreate : function (user) {
+        var salt = bcrypt.genSaltSync(10);
+        user.password = bcrypt.hashSync(user.password, salt);
+      }
+    }
+  });
   Provider.associate = function(models) {
     // associations can be defined here
     Provider.hasMany(models.Post)
   };
+
+  Provider.prototype.getFullName = () => {
+    return [this.firstName, this.lastName].join(' ')
+  }
+
   return Provider;
 };
