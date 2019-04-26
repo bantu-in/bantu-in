@@ -23,12 +23,24 @@ router.get("/:username/feeds", (req, res) => {
             Worker.findByPk(id)])
             .then(found => {
                 // res.send(found)
+                let locations = found[0].map(post => {
+                    let obj = {
+                        title: post.title,
+                        lat: post.lat,
+                        lng: post.lng
+                    }
+                    console.log(obj, '=============')
+                    return obj
+                })
+                locations = JSON.stringify(locations)
+                // res.send(locations)
                 res.render(`./worker/feeds.ejs`, {
                     data: found[1],
                     posts: found[0],
                     inRupiah: inRupiah,
                     username: req.session.username,
-                    userId: req.session.id
+                    userId: req.session.id,
+                    postLoc: locations
                 })
             }).catch(err => {
                 console.log(err)

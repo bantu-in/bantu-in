@@ -12,11 +12,15 @@
     <%- include ../partials/navbar.ejs %>
         <div id="map"></div>
         <script>
+            let dataLoc = JSON.parse('<%- postLoc %>')
             let loc = {
                 lat: <%- data.lat %>,
                 lng: <%- data.lng %>
             }
             var map, infoWindow;
+
+            var mark;
+
             function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: -34.397, lng: 150.644},
@@ -35,11 +39,18 @@
                     map.setCenter(pos);
                     let user = new google.maps.Marker({
                         position: pos,
-                        draggable: true,
                         map: map,
                         title: '<%- data.firstName %>',
                         icon: "https://img.icons8.com/cotton/64/000000/workers-male.png"
                     })
+                    dataLoc.forEach(element => {
+                        mark = new google.maps.Marker({
+                            position: element,
+                            map: map,
+                            title: element.title,
+                            icon: "https://img.icons8.com/office/40/000000/high-priority.png"
+                        })
+                    });
 
                 }, function() {
                     handleLocationError(true, infoWindow, map.getCenter());
@@ -48,22 +59,7 @@
                 else {
                 // Browser doesn't support Geolocation
                 handleLocationError(false, infoWindow, map.getCenter());
-                }
-                google.maps.event.addListener(
-                marker,
-                'drag',
-                function() {
-                    document.getElementById('lat1').innerHTML = marker.position.lat().toFixed(6);
-                    document.getElementById('lng1').innerHTML = marker.position.lng().toFixed(6);
-                    document.getElementById('zoom').innerHTML = mapObject.getZoom();
-
-                    // Dynamically show it somewhere if needed
-                    $(".x").text(marker.position.lat().toFixed(6));
-                    $(".y").text(marker.position.lng().toFixed(6));
-                    $(".z").text(map.getZoom());
-
-                }
-            );   
+                }  
             }
         </script>
     <div class="container">
