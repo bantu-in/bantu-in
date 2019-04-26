@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "postgres",
-    "password": "tau le",
+    "password": "kenyunk23",
     "database": "bantuin-db",
     "host": "127.0.0.1",
     "dialect": "postgres"

@@ -3,7 +3,15 @@ module.exports = (sequelize, DataTypes) => {
   const Provider = sequelize.define('Provider', {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
-    email: DataTypes.STRING,
+    email: {
+      type : DataTypes.STRING,
+      validate : {
+        isEmail : {
+          args : true,
+          msg : 'Invalid email format'
+        }
+      }
+    },
     phone: DataTypes.STRING,
     address: DataTypes.STRING,
     lat: DataTypes.FLOAT,

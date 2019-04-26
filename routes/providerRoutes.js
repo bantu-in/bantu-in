@@ -137,7 +137,9 @@ router.post("/:username/profile", (req, res) => {
 })
 
 router.get('/register', (req, res) => {
-    res.render('./provider/register.ejs')
+    res.render('./provider/register.ejs', {
+        err : req.query.errMsg
+    })
 })
 
 router.post('/register', (req, res) => {
@@ -154,7 +156,7 @@ router.post('/register', (req, res) => {
             res.redirect('/login/provider')
         })
         .catch(err => {
-
+            res.redirect('/provider/register?errMsg='+ err.errors[0].message)
         })
 })
 

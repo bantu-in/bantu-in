@@ -90,10 +90,16 @@ router.get("/:username/profile", (req, res) => {
     if(!req.session.userId){
         res.render("login.ejs")
     }else{
-        res.render("./worker/profile.ejs", {
-            username: req.session.username,
-            userId: req.session.userId
-        })
+        Worker.findByPk(req.session.userId)
+        .then(found => {
+            res.render("./worker/profile.ejs", {
+                username: req.session.username,
+                userId: req.session.userId,
+                worker: found
+            })
+        }).catch(err => {
+            res.send(err)
+        }) 
     }
 })
 
@@ -120,9 +126,74 @@ router.get("/:username/jobDetails/:id", (req, res) => {
         })
     }
 })
-            
-    
-    
+
+router.get('/register', (req, res) => {
+    res.render('./worker/register.ejs' ,{
+        err : req.query.errMsg
+    })
+})
+
+router.post('/register', (req, res) => {
+    Worker.create({
+        firstName : req.body.firstName,
+        lastName : req.body.lastName,
+        email : req.body.email,
+        phone : req.body.phone,
+        address : req.body.address,
+        username : req.body.username,
+        password : req.body.password
+    })
+        .then(() => {
+            res.redirect('/login/provider')
+        })
+        .catch(err => {
+            res.redirect('/worker/register?errMsg=' + err.errors[0].message)
+        })
+})
+
+router.get('/:username/profile', (req, res) => {
+    if(req.session.userId){
+        res.render("login.ejs")
+    }else{
+        Worker.findByPk(req.session.userId)
+            .then(workerData => {
+                res.send(workerData )
+                // res.render("./worker/profile.ejs", {
+                //     worker : worker,
+                //     username : req.session.username,
+                //     userId : req.session.userId
+                // })
+            })
+            .catch(err => {
+                res.send(err)
+            })
+    }
+})
+
+router.post('/:username/profile', (req, res) => {
+    Worker.update({
+        firstName : req.body.firstName,
+        lastName : req.body.lastName,
+        email : req.body.email,
+        phone : req.body.phone,
+        address : req.body.address,
+        username : req.body.username,
+        password : req.body.password
+    }, {
+        where : {
+        id : req.session.userId 
+        }
+    })
+        .then(() => {
+            res.redirect(`/worker/${req.session.username}/feeds`, 302, {
+                username : req.session.username,
+                userId : req.session.userId
+            })
+        })
+        .catch(err => {
+            res.send(err)
+        })
+})
 
 // router.get("/:username/test", (req,res) => {
 //     res.send('masuk')
